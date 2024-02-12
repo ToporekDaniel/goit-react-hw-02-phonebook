@@ -19,19 +19,23 @@ export class App extends Component {
     this.state = {
       contacts: [],
       name: '',
+      number: '',
     };
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    const { name, contacts } = this.state;
-    console.log(name);
+    const { name, contacts, number } = this.state;
     const id = nanoid();
-    this.setState({ contacts: [...contacts, { id, name }] });
+    console.log(name, number, id);
+    this.setState({ contacts: [...contacts, { id, name, number }] });
   };
 
   handleNameChange = event => {
     this.setState({ name: event.target.value });
+  };
+  handleTelChange = event => {
+    this.setState({ number: event.target.value });
   };
 
   render() {
@@ -51,7 +55,18 @@ export class App extends Component {
               required
             />
           </label>
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <label>
+            Number
+            <input
+              onChange={this.handleTelChange}
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            />
+          </label>
+          <SubmitButton type="submit">Add contact</SubmitButton>
         </Form>
         <h2>Contacts</h2>
         <NameList contacts={contacts} />
