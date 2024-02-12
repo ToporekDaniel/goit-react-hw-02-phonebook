@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { NameInput } from './input/inputs';
 import { Component } from 'react';
 import { NameList } from './list/list';
+import { nanoid } from 'nanoid';
 
 const SubmitButton = styled.button`
   width: 10rem;
@@ -26,7 +26,8 @@ export class App extends Component {
     event.preventDefault();
     const { name, contacts } = this.state;
     console.log(name);
-    this.setState({ contacts: [...contacts, { name }] });
+    const id = nanoid();
+    this.setState({ contacts: [...contacts, { id, name }] });
   };
 
   handleNameChange = event => {
@@ -37,6 +38,7 @@ export class App extends Component {
     const { contacts } = this.state;
     return (
       <>
+        <h2>Phonebook</h2>
         <Form onSubmit={this.handleSubmit}>
           <label>
             Name
@@ -51,6 +53,7 @@ export class App extends Component {
           </label>
           <SubmitButton type="submit">Submit</SubmitButton>
         </Form>
+        <h2>Contacts</h2>
         <NameList contacts={contacts} />
       </>
     );
