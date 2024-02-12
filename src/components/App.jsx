@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { NameList } from './list/list';
 import { nanoid } from 'nanoid';
 import { Filter } from './filter/filter';
+import { NameInput, TelInput } from './input/inputs';
 
 const SubmitButton = styled.button`
   width: 10rem;
@@ -35,7 +36,9 @@ export class App extends Component {
     const { name, contacts, number } = this.state;
     const id = nanoid();
     console.log(name, number, id);
-    this.setState({ contacts: [...contacts, { id, name, number }] });
+    this.setState({
+      contacts: [...contacts, { id, name, number }],
+    });
   };
 
   handleNameChange = event => {
@@ -57,28 +60,8 @@ export class App extends Component {
       <>
         <h2>Phonebook</h2>
         <Form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              onChange={this.handleNameChange}
-              type="text"
-              name="name"
-              pattern="^[a-z A-Z а-я А-Я]+(([' -][a-z A-Z а-я А-Я ])?[a-z A-Z а-я А-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-          </label>
-          <label>
-            Number
-            <input
-              onChange={this.handleTelChange}
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-          </label>
+          <NameInput onChange={this.handleNameChange} />
+          <TelInput onChange={this.handleTelChange} />
           <SubmitButton type="submit">Add contact</SubmitButton>
         </Form>
         <h2>Contacts</h2>
