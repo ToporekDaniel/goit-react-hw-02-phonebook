@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Component } from 'react';
-import { NameList } from './list/list';
+import { ContactList } from './list/list';
 import { nanoid } from 'nanoid';
 import { Filter } from './filter/filter';
 import { NameInput, TelInput } from './input/inputs';
@@ -66,7 +66,7 @@ export class App extends Component {
         </Form>
         <h2>Contacts</h2>
         <Filter onFilterChange={this.handleFilterChange} />
-        <NameList contacts={filteredContacts} />
+        <ContactList contacts={filteredContacts} />
       </>
     );
   }
